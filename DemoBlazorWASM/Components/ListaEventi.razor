@@ -1,0 +1,43 @@
+﻿<h3>@Titolo</h3>
+
+@if(Eventi == null)
+{
+    <p><em>Nessun evento in programma...</em></p>
+}
+else
+{
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Data</th>
+                <th>Località</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var evento in Eventi)
+            {
+                <tr>
+                    <td>@evento.Id</td>
+                    <td>@evento.Nome</td>
+                    <td>@evento.Data</td>
+                    <td>@evento.Località</td>
+                    <td><button @onclick="() => OnRimuoviEvento.InvokeAsync(evento)" class="btn btn-danger">Elimina</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    [Parameter]
+    public List<Evento>? Eventi { get; set; }
+    [Parameter]
+    public string? Titolo { get; set; } = "Lista Eventi";
+    [Parameter]
+    public EventCallback<Evento> OnRimuoviEvento { get; set; }
+
+
+}
